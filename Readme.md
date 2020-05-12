@@ -6,5 +6,7 @@
 ### Objectives
 
 ### Partners and roles
-
+	- Gilles GESQUIERES
+	- Didier CHANFREY
+	- Corentin GAUTIER
 ### Deliverables
