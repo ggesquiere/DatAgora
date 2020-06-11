@@ -7,6 +7,6 @@
 
 ### Partners and roles
 	- Gilles GESQUIERE
-	- Didier CHANFREY
+	- Didier CHANFRAY
 	- Corentin GAUTIER
 ### Deliverables
