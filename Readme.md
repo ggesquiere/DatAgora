@@ -9,4 +9,5 @@
 	- Gilles GESQUIERE
 	- Didier CHANFRAY
 	- Corentin GAUTIER
+	- Homère BOURGEOIS
 ### Deliverables
