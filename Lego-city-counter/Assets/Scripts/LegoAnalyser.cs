@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using UnityEditor;
 using UnityEngine;
 
 public class LegoAnalyser : MonoBehaviour
@@ -11,12 +13,23 @@ public class LegoAnalyser : MonoBehaviour
     public float scale = 1;
     public LayerMask collisionMask;
     public bool setGroundAt0;
-    public string fileName = "lego map";
+    public string fileName = "lego_map";
+    public string folderName = "lego_map";
+
+    public bool exportToCSV;
+    public string delimiter = ",";
+
+    public int legoTileSize = 32;
+
 
     public void ExportLegoMap()
     {
         LegoMap legoMap = ComputeLegoMap();
         File.WriteAllText("Assets/JSON/" + fileName + ".json", JsonUtility.ToJson(legoMap));
+        if (exportToCSV)
+        {
+            ExportToCSV(legoMap);
+        }
     }
 
     private LegoMap ComputeLegoMap()
@@ -91,5 +104,53 @@ public class LegoAnalyser : MonoBehaviour
             transform.position - new Vector3(0, analyserHeight / 2f, 0),
             new Vector3(legoMapSize.x * scale, analyserHeight, legoMapSize.y * scale)
         );
+    }
+
+    void ExportToCSV(LegoMap legoMap)
+    {
+        int nbHorizontalTiles = Mathf.CeilToInt((float)legoMapSize.x / (float)legoTileSize);
+        int nbVerticalTiles = Mathf.CeilToInt((float)legoMapSize.y / (float)legoTileSize);
+
+        int outputHorizontalSize = nbHorizontalTiles * legoTileSize;
+        int outputVerticalSize = nbVerticalTiles * legoTileSize;
+
+        int[] output = new int[outputHorizontalSize * outputVerticalSize];
+
+        for (int i = 0 ; i < legoMapSize.y ; i++)
+        {
+            for(int j = 0 ; j < legoMapSize.x ; j++)
+            {
+                output [ i * outputHorizontalSize + j ] = Mathf.RoundToInt(legoMap.columns[i* legoMapSize.x + j].height);
+            }
+        }
+
+
+
+        AssetDatabase.CreateFolder("Assets/CSV", folderName + "_Instructions");
+
+        for (int i = 0; i < nbVerticalTiles;i++)
+        {
+            for(int j = 0; j < nbHorizontalTiles;j++)
+            {
+                string filePath = "Assets/CSV/" + folderName + "_Instructions/" + fileName + "_" + i + "_" + j + ".csv";
+                StringBuilder sb = new StringBuilder();
+                
+                for( int u = 0; u < legoTileSize ; u++)
+                {
+                    string tempLine = "";
+                    for(int v = 0; v < legoTileSize ; v++)
+                    {
+                        //sb.AppendLine(string.Join(delimiter, output[(i * legoMapSize.x + j) * legoTileSize + u * legoMapSize.x + v]));
+                        tempLine += output[(i * outputHorizontalSize + j) * legoTileSize + u * outputHorizontalSize + v] + delimiter;
+                    }
+                    sb.AppendLine(tempLine);
+                }
+
+                StreamWriter outStream = System.IO.File.CreateText(filePath);
+                outStream.WriteLine(sb);
+                outStream.Close();
+            }
+        }
+
     }
 }
