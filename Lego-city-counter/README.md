@@ -24,7 +24,6 @@ Gamagora 2019 - Transformation of a Mesh into Lego<br>
 - Creating Mesh
 
 ## Grid Setup (LegoAnalyser) :
-<data-canonical-src="Assets/Img/LegoAnalyser.PNG" data-canonical-src="Assets/Img/LegoAnalyser.PNG" width="430" height="130" /><br>
 - Choose the size of the map (legos plate on the ground).
 - Choose the scale and height of the map so that it includes all the terrain to be analysed.
 - Choose the LayerMask to intersect (All or a specific one if you do not need to analyze all).
@@ -37,5 +36,3 @@ Gamagora 2019 - Transformation of a Mesh into Lego<br>
 - Map Scale
 - Number of Legos
 - Matrix which at each point associates its type and corresponding height.
-
-Translated with www.DeepL.com/Translator (free version)
