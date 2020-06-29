@@ -11,6 +11,7 @@ public class LegoAnalyser : MonoBehaviour
     public Vector2Int legoMapSize = new Vector2Int(100, 100);
     public float analyserHeight = 10;
     public float scale = 1;
+    public float verticalScaleMultiplicator = 1;
     public LayerMask collisionMask;
     public bool setGroundAt0;
     public string fileName = "lego_map";
@@ -77,6 +78,8 @@ public class LegoAnalyser : MonoBehaviour
         
         for (int i = 0; i < legoMap.columns.Count; i++)
         {
+
+            // Position la plus basse ramenée à hauteur 0
             if (setGroundAt0)
             {
                 if (legoMap.columns[i].height < minHeight)
@@ -85,11 +88,9 @@ public class LegoAnalyser : MonoBehaviour
                     legoMap.columns[i].height -= minHeight;
             }
 
-            // Normalisation en Lego et Count
-            legoMap.columns[i].height = legoMap.columns[i].height / (1.2f * scale);
-            legoMap.columns[i].height = Mathf.Round(legoMap.columns[i].height);
+            // Normalisation en lego et count avec multiplication de la taille par l'echelle verticale
+            legoMap.columns[i].height = Mathf.Round(legoMap.columns[i].height * verticalScaleMultiplicator);
             count += (int)legoMap.columns[i].height;
-            legoMap.columns[i].height = legoMap.columns[i].height * 1.2f;
         }
 
         legoMap.legoCount = count;
@@ -124,8 +125,6 @@ public class LegoAnalyser : MonoBehaviour
             }
         }
 
-
-
         AssetDatabase.CreateFolder("Assets/CSV", folderName + "_Instructions");
 
         for (int i = 0; i < nbVerticalTiles;i++)
@@ -140,7 +139,6 @@ public class LegoAnalyser : MonoBehaviour
                     string tempLine = "";
                     for(int v = 0; v < legoTileSize ; v++)
                     {
-                        //sb.AppendLine(string.Join(delimiter, output[(i * legoMapSize.x + j) * legoTileSize + u * legoMapSize.x + v]));
                         tempLine += output[(i * outputHorizontalSize + j) * legoTileSize + u * outputHorizontalSize + v] + delimiter;
                     }
                     sb.AppendLine(tempLine);
