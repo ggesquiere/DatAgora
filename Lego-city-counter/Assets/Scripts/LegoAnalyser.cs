@@ -8,18 +8,34 @@ using UnityEngine;
 
 public class LegoAnalyser : MonoBehaviour
 {
+    [Space(5)]
+    [Header("    Analyzer attributes")]
+    [Tooltip("Desired lego map size (in lego amount).")]
     public Vector2Int legoMapSize = new Vector2Int(100, 100);
+    [Tooltip("Maximum height for the analyzer.")]
     public float analyserHeight = 10;
+    [Tooltip("Size of one lego in unity units. (Impacts lenght and width of the analyzer in editor. Be sure to adjust it's size and position accordingly.)")]
     public float scale = 1;
+    [Tooltip("Multiplies all heights computed for the map.")]
     public float verticalScaleMultiplicator = 1;
+    [Tooltip("Set the layers detected by the analyzer.")]
     public LayerMask collisionMask;
+    [Tooltip("Sets the lowest heigth to be 0 in the final results. adjusts other heigths accordingly.")]
     public bool setGroundAt0;
+    [Tooltip("Analyzer color in editor")]
+    public Color analyzerColor = new Color(1, 0, 0, 0.5f);
+
+    [Space(5)]
+    [Header("    Files configuration")]
+    [Tooltip("Name of the JSON and CSV files output")]
     public string fileName = "lego_map";
-    public string folderName = "lego_map";
-
+    [Tooltip("Check if you need CSV export for building instructions")]
     public bool exportToCSV;
+    [Tooltip("Name of the folder for the CSV files")]
+    public string folderName = "lego_map";
+    [Tooltip("Sets the delimiter used in the CSV files")]
     public string delimiter = ",";
-
+    [Tooltip("Size of the tile used for your model to properly adjust instructions format")]
     public int legoTileSize = 32;
 
 
@@ -35,6 +51,7 @@ public class LegoAnalyser : MonoBehaviour
 
     private LegoMap ComputeLegoMap()
     {
+        //Initialisation
         int count = 0;
         LegoMap legoMap = new LegoMap();
 
@@ -49,6 +66,8 @@ public class LegoAnalyser : MonoBehaviour
         );
 
         float minHeight = analyserHeight;
+
+        //Map computation
         for (int x = 0; x < legoMapSize.x; x++)
         {
             for (int z = 0; z < legoMapSize.y; z++)
@@ -75,11 +94,11 @@ public class LegoAnalyser : MonoBehaviour
             }
         }
         
-        
+        // Conversion to legos
         for (int i = 0; i < legoMap.columns.Count; i++)
         {
 
-            // Position la plus basse ramenée à hauteur 0
+            // Lowest height brought to 0
             if (setGroundAt0)
             {
                 if (legoMap.columns[i].height < minHeight)
@@ -88,7 +107,6 @@ public class LegoAnalyser : MonoBehaviour
                     legoMap.columns[i].height -= minHeight;
             }
 
-            // Normalisation en lego et count avec multiplication de la taille par l'echelle verticale
             legoMap.columns[i].height = Mathf.Round(legoMap.columns[i].height * verticalScaleMultiplicator);
             count += (int)legoMap.columns[i].height;
         }
@@ -98,9 +116,10 @@ public class LegoAnalyser : MonoBehaviour
         return legoMap;
     }
 
+    // Parameters for the analyzer display in editor
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        Gizmos.color = analyzerColor;
         Gizmos.DrawCube(
             transform.position - new Vector3(0, analyserHeight / 2f, 0),
             new Vector3(legoMapSize.x * scale, analyserHeight, legoMapSize.y * scale)
@@ -109,6 +128,7 @@ public class LegoAnalyser : MonoBehaviour
 
     void ExportToCSV(LegoMap legoMap)
     {
+        // Output initialisation
         int nbHorizontalTiles = Mathf.CeilToInt((float)legoMapSize.x / (float)legoTileSize);
         int nbVerticalTiles = Mathf.CeilToInt((float)legoMapSize.y / (float)legoTileSize);
 
@@ -125,13 +145,15 @@ public class LegoAnalyser : MonoBehaviour
             }
         }
 
-        AssetDatabase.CreateFolder("Assets/CSV", folderName + "_Instructions");
+
+        //Folder and files creation
+        AssetDatabase.CreateFolder("Assets/CSV", folderName);
 
         for (int i = 0; i < nbVerticalTiles;i++)
         {
             for(int j = 0; j < nbHorizontalTiles;j++)
             {
-                string filePath = "Assets/CSV/" + folderName + "_Instructions/" + fileName + "_" + i + "_" + j + ".csv";
+                string filePath = "Assets/CSV/" + folderName + fileName + "_" + i + "_" + j + ".csv";
                 StringBuilder sb = new StringBuilder();
                 
                 for( int u = 0; u < legoTileSize ; u++)
@@ -149,6 +171,5 @@ public class LegoAnalyser : MonoBehaviour
                 outStream.Close();
             }
         }
-
     }
 }
