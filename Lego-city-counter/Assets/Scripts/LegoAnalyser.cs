@@ -24,6 +24,8 @@ public class LegoAnalyser : MonoBehaviour
     public bool setGroundAt0;
     [Tooltip("Analyzer color in editor")]
     public Color analyzerColor = new Color(1, 0, 0, 0.5f);
+    [Tooltip("single lego color displayed in the middle of the analyzer")]
+    public Color singleLegoColor = new Color(0, 1, 1, 0.5f);
 
     [Space(5)]
     [Header("    Files configuration")]
@@ -123,6 +125,15 @@ public class LegoAnalyser : MonoBehaviour
         Gizmos.DrawCube(
             transform.position - new Vector3(0, analyserHeight / 2f, 0),
             new Vector3(legoMapSize.x * scale, analyserHeight, legoMapSize.y * scale)
+        );
+
+        Debug.Log(analyzerColor);
+
+        singleLegoColor = new Color(1-analyzerColor.r , 1-analyzerColor.g , 1-analyzerColor.b, 1);
+        Gizmos.color = singleLegoColor;
+        Gizmos.DrawCube(
+            transform.position - new Vector3(0, analyserHeight / 2f, 0),
+            new Vector3(scale, 1, scale)
         );
     }
 
