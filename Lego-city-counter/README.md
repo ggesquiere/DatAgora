@@ -1,6 +1,6 @@
 # Lego CITY COUNTER
 Gamagora 2019 - Transformation of a Mesh into Lego<br>
-https://github.com/antoinechedin/lego-city-counter
+https://github.com/antoinechedin/lego-city-counter<br>
 **Antoine CHEDIN & Rendy LATBI**
 
 ## Implemented features :
