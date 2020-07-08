@@ -1,9 +1,7 @@
 # Recognition City
-Gamagora 2019
-Recognition of blue rectangle on a white paper that simulate buildings and red triangle which give a POV for the camera in Unity 
+Gamagora 2019<br>
+Recognition of blue rectangle on a white paper that simulate buildings and red triangle which give a POV for the camera in Unity <br>
 **Corentin GAUTIER**
-
-[Exemple](https://www.youtube.com/watch?v=AbVM-ZPWpCQ)
 
 ## Implemented features :
 - Images processing (expansion, convert gray image)
