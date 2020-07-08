@@ -1,6 +1,6 @@
 # Recognition City
 Gamagora 2019<br>
-Recognition of blue rectangle on a white paper that simulate buildings and red triangle which give a POV for the camera in Unity <br>
+<em>Recognition of blue rectangle on a white paper that simulate buildings and red triangle which give a POV for the camera in Unity </em><br>
 **Corentin GAUTIER**
 
 ## Implemented features :
@@ -11,6 +11,7 @@ Recognition of blue rectangle on a white paper that simulate buildings and red t
 ## Illustrations : 
 
 
+<img src="https://github.com/VCityTeam/DatAgora/blob/master/Pictures/Doc/CaptureMire.PNG" width="430" height="250" /> <img src="https://github.com/VCityTeam/DatAgora/blob/master/Pictures/Doc/CaptureMire2.PNG" width="430" height="250" />
 Exemple of use case : [Video](https://www.youtube.com/watch?v=AbVM-ZPWpCQ)
 ## Use of the Project :
 - Import the Project on your PC
