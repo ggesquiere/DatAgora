@@ -12,7 +12,7 @@ Gamagora 2019<br>
 
 
 <img src="https://github.com/VCityTeam/DatAgora/blob/master/Pictures/Doc/CaptureMire.PNG" width="430" height="250" /> <img src="https://github.com/VCityTeam/DatAgora/blob/master/Pictures/Doc/CaptureMire2.PNG" width="430" height="250" /><br>
-Exemple of use case : [Video](https://www.youtube.com/watch?v=AbVM-ZPWpCQ)
+**Exemple of use case : [Video](https://www.youtube.com/watch?v=AbVM-ZPWpCQ)**
 ## Use of the Project :
 - Import the Project on your PC
 - Launching with Unity 2019.2.19
