@@ -21,6 +21,7 @@ public class CameraCity : MonoBehaviour
     private List<RotatedRect> buildings;
     private List<Triangle2DF> ListTriangles = new List<Triangle2DF>();
     private List<GameObject> listBuilding =  new List<GameObject>();
+    private GameObject goMire;
 
 
     //-----public-----//
@@ -196,32 +197,42 @@ public class CameraCity : MonoBehaviour
 
     public void CreateBuilding()
     {
-
         //Clear building
-        if (listBuilding.Count > 0) {
+        ClearGameObject();
+
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            GameObject go = Instantiate(building, new Vector3(Scale * buildings[i].Center.X / 600, 1, Scale * buildings[i].Center.Y / 600), Quaternion.identity);
+            go.transform.localScale = new Vector3(Scale * buildings[i].Size.Width / 600, 1, Scale * buildings[i].Size.Height / 600);
+            go.transform.Rotate(new Vector3(0,1,0), buildings[i].Angle);
+            listBuilding.Add(go);
+        }
+
+        goMire = Instantiate(Detection, new Vector3(Scale * ListTriangles[0].Centeroid.X / 600, 1, Scale * ListTriangles[0].Centeroid.Y / 600), Quaternion.identity);
+        goMire.name = "POV";
+    }
+
+    public void VisualizeBuilding()
+    {
+        Camera.main.transform.position = new Vector3(20, 20, -10);
+        Camera.main.transform.rotation = Quaternion.Euler(40, 0, 0);
+        Camera.main.GetComponent<SmoothCamera>().StartCameraMovment();
+    }
+
+    //Clear all gameObject captures
+    public void ClearGameObject()
+    {
+        if (listBuilding.Count > 0)
+        {
             for (int i = 0; i < listBuilding.Count; i++)
             {
                 Destroy(listBuilding[i]);
             }
             listBuilding.Clear();
         }
-        for (int i = 0; i < buildings.Count; i++)
+        if (goMire!= null)
         {
-            
-            GameObject go = Instantiate(building, new Vector3(Scale * buildings[i].Center.X / 600, 1, Scale * buildings[i].Center.Y / 600), Quaternion.identity);
-            go.transform.localScale = new Vector3(Scale * buildings[i].Size.Width / 600, 1, Scale * buildings[i].Size.Height / 600);
-            go.transform.Rotate(new Vector3(0,1,0), buildings[i].Angle);
-            listBuilding.Add(go);
+            Destroy(goMire);
         }
-    }
-
-    public void VisualizeBuilding()
-    {
-        //Mire = ListTriangles[0];
-        GameObject go = Instantiate(Detection, new Vector3(Scale * ListTriangles[0].Centeroid.X / 600, 1, Scale * ListTriangles[0].Centeroid.Y / 600), Quaternion.identity);
-        go.name = "POV";
-
-        Camera.main.GetComponent<SmoothCamera>().StartCameraMovment(go.transform);
-
     }
 }

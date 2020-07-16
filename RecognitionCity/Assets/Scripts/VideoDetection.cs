@@ -109,12 +109,12 @@ public class VideoDetection : MonoBehaviour
         Image<Hsv, Byte> i = image.ToImage<Hsv, Byte>();
         Mat result = i.InRange(lower, higher).Mat;
 
-        //lower = new Hsv(hsv2Min.x, hsv2Min.y, hsv2Min.z);
-        //higher = new Hsv(hsv2Max.x, hsv2Max.y, hsv2Max.z);
+        lower = new Hsv(hsv2Min.x, hsv2Min.y, hsv2Min.z);
+        higher = new Hsv(hsv2Max.x, hsv2Max.y, hsv2Max.z);
 
-        //Mat result2 = i.InRange(lower, higher).Mat;
+        Mat result2 = i.InRange(lower, higher).Mat;
 
-        //Mat result = result1 + result2;
+        result = result + result2;
 
         int operationSize = 1;
 
