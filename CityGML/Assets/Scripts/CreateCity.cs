@@ -9,7 +9,7 @@ public class CreateCity : MonoBehaviour
 
     List<GameObject> buildingInstiate;
 
-    public string path = "E:/StageMaster/CityGML/Assets/GML/adr_voie_lieu.adrarrond.gml";
+    public string path;
 
     //Prefab of houses (Did we realy need prefabs ?)
     public HouseConstructor houseConstructorPrefab;

@@ -17,16 +17,18 @@ public class HouseConstructor : MonoBehaviour
         List<int> triangles = new List<int>();
         List<Vector3> vert = new List<Vector3>();
 
+        float MinCoordY = 500.0f;
         //Recalculate coordinate with the city center 
         for (int i = 0; i < building.points.Count; i++)
         {
-            building.points[i] = new Vector3((building.points[i].x - cityCenter.x), building.points[i].y / 10, (building.points[i].z - cityCenter.z));
+            building.points[i] = new Vector3((building.points[i].x - cityCenter.x), building.points[i].y, (building.points[i].z - cityCenter.z));
+            //if ()
         }
 
         //Down vertices
         for (int i = 0; i < building.points.Count; i++)
         {
-            vert.Add(new Vector3(building.points[i].x, 0, building.points[i].z));
+            vert.Add(new Vector3(building.points[i].x, 150, building.points[i].z));
         }
 
         //Up vertices
