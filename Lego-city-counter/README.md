@@ -3,10 +3,16 @@ Gamagora 2019 - Transformation of a Mesh into Lego<br>
 https://github.com/antoinechedin/lego-city-counter<br>
 **Antoine CHEDIN & Rendy LATBI**
 
+## Description
+
+This is a Unity project that enables you to produce a lego model of a Building, a neighbourhood or an entire city.
+
 ## Implemented features :
 - Customizable Grid for Mesh Analysis
+- Scale parameters to better adjust your results to your needs
 - Mesh analysis and LegoMap export in Json
-- Creating a Mesh from a LegoMap
+- Export in CSV files for simpler building instructions, fitting your lego tiles
+- Creating a Mesh from a LegoMap with adjustable vertical scale
 
 ## Illustrations: 
 <img src="Assets/Img/Terrain.PNG" data-canonical-src="Assets/Img/Terrain.PNG" width="430" height="250" /> <img src="Assets/Img/Lego.PNG" data-canonical-src="Assets/Img/Lego.PNG" width="430" height="250" />
