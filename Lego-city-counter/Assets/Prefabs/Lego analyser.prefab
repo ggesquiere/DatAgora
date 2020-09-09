@@ -46,8 +46,15 @@ MonoBehaviour:
   legoMapSize: {x: 100, y: 100}
   analyserHeight: 25
   scale: 1
+  verticalScaleMultiplicator: 1
   collisionMask:
     serializedVersion: 2
     m_Bits: 4294967295
   setGroundAt0: 1
-  fileName: CocoTest
+  analyzerColor: {r: 1, g: 0, b: 0, a: 0.5}
+  singleLegoColor: {r: 0, g: 1, b: 1, a: 0.5}
+  fileName: Test
+  exportToCSV: 0
+  folderName: lego_map
+  delimiter: ;
+  legoTileSize: 32
