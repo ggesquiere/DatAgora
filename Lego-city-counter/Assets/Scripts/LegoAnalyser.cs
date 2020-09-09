@@ -143,16 +143,18 @@ public class LegoAnalyser : MonoBehaviour
         int nbHorizontalTiles = Mathf.CeilToInt((float)legoMapSize.x / (float)legoTileSize);
         int nbVerticalTiles = Mathf.CeilToInt((float)legoMapSize.y / (float)legoTileSize);
 
+        Debug.Log(nbHorizontalTiles+","+ nbVerticalTiles); // Bigger size to compensate the empty spaces of tiles
+
         int outputHorizontalSize = nbHorizontalTiles * legoTileSize;
         int outputVerticalSize = nbVerticalTiles * legoTileSize;
 
         int[] output = new int[outputHorizontalSize * outputVerticalSize];
 
-        for (int i = 0 ; i < legoMapSize.y ; i++)
+        for (int i = 0 ; i < legoMapSize.x ; i++)
         {
-            for(int j = 0 ; j < legoMapSize.x ; j++)
+            for(int j = 0 ; j < legoMapSize.y ; j++)
             {
-                output [ i * outputHorizontalSize + j ] = Mathf.RoundToInt(legoMap.columns[i* legoMapSize.x + j].height);
+                output [ i * outputVerticalSize + j ] = Mathf.RoundToInt(legoMap.columns[ i * legoMapSize.y + j ].height);
             }
         }
 
@@ -160,19 +162,22 @@ public class LegoAnalyser : MonoBehaviour
         //Folder and files creation
         AssetDatabase.CreateFolder("Assets/CSV", folderName);
 
-        for (int i = 0; i < nbVerticalTiles;i++)
+        for (int globalHorizontalIndex = 0 ; globalHorizontalIndex < nbHorizontalTiles ; globalHorizontalIndex++)
         {
-            for(int j = 0; j < nbHorizontalTiles;j++)
+            for(int globalVerticalIndex = 0 ; globalVerticalIndex < nbVerticalTiles ; globalVerticalIndex++)
             {
-                string filePath = "Assets/CSV/" + folderName + fileName + "_" + i + "_" + j + ".csv";
+                string filePath = "Assets/CSV/" + folderName + "/" + fileName + "_" + globalHorizontalIndex + "_" + globalVerticalIndex + ".csv";
                 StringBuilder sb = new StringBuilder();
                 
-                for( int u = 0; u < legoTileSize ; u++)
+                int globalIndex = (globalHorizontalIndex * outputVerticalSize + globalVerticalIndex) * legoTileSize; //Index to place on the Tile
+
+                for (int localHorizontalIndex = 0; localHorizontalIndex < legoTileSize; localHorizontalIndex++)
                 {
                     string tempLine = "";
-                    for(int v = 0; v < legoTileSize ; v++)
+                    for ( int localVerticalIndex = 0; localVerticalIndex < legoTileSize ; localVerticalIndex++)
                     {
-                        tempLine += output[(i * outputHorizontalSize + j) * legoTileSize + u * outputHorizontalSize + v] + delimiter;
+                        int localIndex = localHorizontalIndex * outputVerticalSize + localVerticalIndex; // index to select the column inside the tile
+                        tempLine += output[ globalIndex + localIndex ] + delimiter;
                     }
                     sb.AppendLine(tempLine);
                 }
