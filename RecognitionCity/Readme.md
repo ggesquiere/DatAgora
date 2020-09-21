@@ -25,7 +25,7 @@ Gamagora 2019<br>
 - Launch "Visualize at red triangle". Then you got a smooth movment around the building selected
 
 ### On Linux
-- Install library [OpenCV](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html)
+- Install library [OpenCV](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html)<br>
  To use on Visual studio code :
     - Create a project folder
     - Ctrl + Shift + P to open command and search "C/C++ : Edit Configurations JSON"
