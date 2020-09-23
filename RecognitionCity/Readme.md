@@ -30,4 +30,4 @@ Gamagora 2019<br>
     - Create a project folder
     - Ctrl + Shift + P to open command and search "C/C++ : Edit Configurations JSON"
     - Add in the JSON file an including path of the OpenCV library, it should be in "usr/local/include/opencv4/**"
-    - Write your code and compile it with "clang++ -std=c++11 nameOfyourFile.cpp -o w `pkg-config --cflags --libs opencv`"
+    - Write your code and compile it with "clang++ -std=c++11 nameOfyourFile.cpp -o w `pkg-config --cflags --libs opencv` "
