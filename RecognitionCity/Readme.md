@@ -22,7 +22,7 @@ Gamagora 2019<br>
 - You can modify the layout of your buildings, this will update in unity
 - Launch "Create City" to visualize the city in unity
 - Set the red triangle next to a building
-- Launch "Visualize at red triangle". Then you got a smooth movment around the building selected
+- Launch "Visualize at red triangle". Then you got a smooth movement around the building selected
 
 ### On Linux
 - Install library [OpenCV](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html)<br>
