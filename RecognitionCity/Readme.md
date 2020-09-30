@@ -1,5 +1,4 @@
 # Recognition City
-Gamagora 2019<br>
 <em>Recognition of blue rectangle on a white paper that simulate buildings and red triangle which give a POV for the camera in Unity </em><br>
 **Corentin GAUTIER**
 
